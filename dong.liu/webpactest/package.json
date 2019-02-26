@@ -1,0 +1,24 @@
+{
+  "name": "webpactest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "a.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.0.0",
+    "angular": "^1.6.3",
+    "angular-ui-router": "^1.0.18",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.0",
+    "css-loader": "^0.27.3",
+    "html-loader": "^0.4.5"
+  },
+  "devDependencies": {
+    "style-loader": "^0.23.0"
+  }
+}

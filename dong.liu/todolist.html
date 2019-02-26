@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="http://cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script>
+    <style type="text/css">
+        .del {
+            display: none
+        }
+
+        .list:hover .del {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div ng-app="myApp">
+        <div ng-controller="MyController">
+            <input type="text" ng-model="content" placeholder="输入需要添加的任务">
+            <input type="button" value="添加" ng-click="add()">
+
+            <div class="list" ng-repeat="a in arr track by $index">
+                <input type="checkbox" ng-model="a.checked" ng-checked="all">
+                <span>{{a.text}}日期：{{a.date}}完成日期：{{a.finshtime}}{{a.static}}</span>
+                <input type="button" value="完成" class="finsh" ng-click="active($index)" ng-show="a.buttonStatic">
+                <input type="button" value="激活" class="active" ng-click="finsh($index)" ng-show="!a.buttonStatic">
+                <input type="button" value="删除" class="del" ng-click="del($index)" />
+            </div>
+            <div>总数：{{number}}</div>
+            <div>已完成：{{finshnumber}}</div>
+            <div>未完成:{{activenumber}}</div>
+            <input type="button" value="已完成" ng-click="finshed()">
+            <input type="button" value="未完成" ng-click="actived()">
+            <input type="button" value="前一天" ng-click="afterDay()">
+            <input type="button" value="当前天" ng-click="nowDay()">
+            <input type="button" value="后一天" ng-click="beforeDay()">
+            <input type="button" value="全选" ng-click="checkall()">
+        </div>
+    </div>
+    <script type="text/javascript"> 
+        angular.module("myApp", [])
+            .controller('MyController',
+                function ($scope, $parse, $interpolate) {
+                    $scope.arr = [];
+                    $scope.listarr = [];
+                    //获取总数量，未完成数量，已完成数量的函数  name：total();
+                    var total = function () {
+                        //获取当前页面上arr数组内所有数据的数量
+                        // $scope.number = $scope.arr.length;
+                        // //获取当前页面上arr数组内所有已完成数据的数量
+                        // $scope.finshnumber = $scope.arr.filter(function (e) {
+                        //     return e.static == "true";
+                        // }).length;
+                        // //获取当前页面上arr数组内所有未完成数据的数量
+                        // $scope.activenumber = $scope.arr.filter(function (e) {
+                        //     return e.static == "false";
+                        // }).length;
+                        $scope.finshnumber = 0;
+                        $scope.activenumber = 0;
+                        $scope.number = $scope.arr.length;
+                        $scope.arr.forEach(element => {
+                            if (element.static == "true") {
+                                $scope.finshnumber = $scope.finshnumber + 1;
+                            } else {
+                                $scope.activenumber = $scope.activenumber + 1;
+                            }
+
+                        });
+                    }
+                    //前一天
+                    $scope.afterDay = function () {
+                        var t = new Date();
+                        var day = new Date(t.getTime() - 24 * 60 * 60 * 1000);
+                        //筛选出数组内属性date为前一天的全部数据，并放入数组arr内
+                        $scope.arr = $scope.listarr.filter(function (e) {
+                            return e.date == day.toDateString();
+                        });
+                        total();
+                    }
+                    //当前天
+                    $scope.nowDay = function () {
+                        var t = new Date();
+                        //筛选出数组内属性date为当前日期的全部数据，并放入数组arr内
+                        $scope.arr = $scope.listarr.filter(function (e) {
+                            return e.date == t.toDateString();
+                        });
+                        total();
+                    }
+                    //后一天
+                    $scope.beforeDay = function () {
+                        var t = new Date();
+                        var day = new Date(t.getTime() + 24 * 60 * 60 * 1000);
+                        //筛选出数组内属性date为后一天的全部数据，并放入数组arr内
+                        $scope.arr = $scope.listarr.filter(function (e) {
+                            return e.date == day.toDateString();
+                        });
+                        total();
+                    }
+
+                    //全选
+                    $scope.checkall = function () {
+                        //循环遍历arr数组内的每个数据，修改被选择的状态，任务完成状态，删除激活按钮的状态，并插入完成时间
+                        $scope.arr.forEach(function (item) {
+                            item.checked = true;
+                            item.static = "true";
+                            item.buttonStatic = false;
+                            var t = new Date().getDate();
+                            item.finshtime = t;
+                        })
+                        total();
+                    }
+                    //已完成任务
+                    $scope.finshed = function () {
+                        //根据属性static筛选出所有已完成的任务
+                        $scope.arr = $scope.listarr.filter(function (e) {
+                            return e.static == "true";
+                        });
+                    }
+                    //未完成任务
+                    $scope.actived = function () {
+                        //根据属性static筛选出所有未完成的任务
+                        $scope.arr = $scope.listarr.filter(function (e) {
+                            return e.static == "false";
+                        });
+                    }
+                    //添加按钮
+                    $scope.add = function () {
+                        var t = new Date().toDateString();
+                        //创建新添加任务的对象，并将其中的属性赋值
+                        let a = { 'text': $scope.content, 'date': t, 'finshtime': '0', 'static': 'false', 'buttonStatic': true };
+                        $scope.listarr.push(a);
+                        localStorage.setItem(1, JSON.stringify($scope.listarr));
+                        $scope.listarr = JSON.parse(localStorage.getItem(1));
+                        $scope.arr = $scope.listarr;
+                        total();
+                    };
+                    //删除按钮
+                    $scope.del = function (index) {
+                        //根据传回的值判断当前任务是否被选择
+                        if ($scope.arr[index].checked) {
+                            $scope.arr.splice(index, 1);
+                            localStorage.setItem(1, JSON.stringify($scope.arr));
+                            $scope.listarr = JSON.parse(localStorage.getItem(1));
+                            $scope.arr = $scope.listarr;
+                        } else {
+                            var warm = confirm("此任务还未完成，确认删除？")
+                            if (warm == true) {
+                                $scope.arr.splice(index, 1);
+                                localStorage.setItem(1, JSON.stringify($scope.arr));
+                                $scope.listarr = JSON.parse(localStorage.getItem(1));
+                                $scope.arr = $scope.listarr;
+                            }
+                            else {
+                                alert('操作失败');
+                            }
+                        };
+                        total();
+                    };
+                    //完成按钮
+                    $scope.active = function (index) {
+                        //根据传回的值获取到当前的对象进行操作
+                        let task = $scope.arr[index];
+                        task.checked = true;
+                        var t = new Date().toDateString();
+                        task.finshtime = t;
+                        task.static = "true";
+                        task.buttonStatic = false;
+                        total();
+                    };
+                    //激活按钮
+                    $scope.finsh = function (index) {
+                        let task = $scope.arr[index];
+                        task.checked = false;
+                        task.finshtime = "0";
+                        task.static = "false";
+                        task.buttonStatic = true;
+                        total();
+                    };
+                }); 
+    </script>
+</body>
+
+</html>

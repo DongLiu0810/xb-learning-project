@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link href="./router.css" rel="stylesheet" type="text/css"> -->
+  <title>AngularJS</title>
+</head>
+
+<body ng-app="ngRouteExample">
+
+  <div>
+    <div class="total">
+      <div ng-show="userstatic">
+        <span>已登录用户为：{{username}}</span>
+        <button ng-click="logout()">退出</button>
+      </div>
+      <div ng-show="userstaticed">
+        <span>您还未登录，请
+          <button ng-click="logined()">登录</button>
+        </span>
+      </div>
+    </div>
+    <div class="totalBody" ui-view></div>
+  </div>
+</body>
+<script src="./dist/bundle.js"></script>
+</html>

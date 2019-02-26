@@ -1,0 +1,11 @@
+<div>
+    <h1> 首页 </h1>
+    <table cellspacing="0" cellpadding="0">
+        <tr ng-repeat="item in lists">
+            <td>日期：{{ item.createdAt }}</td>
+            <td>名称：{{ item.title }}</td>
+            <td>创建者：{{ item.creater }}</td>
+        </tr>
+    </table>
+    <button class="indexButton" ng-click="getlist()">查看更多</button>
+</div>

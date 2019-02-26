@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>vue</title>
+        <style>
+            /* css 代码 */
+            .group{
+                margin-bottom: 20px;
+                border-top: 1px solid #efefef;
+            }
+            .groupTitle{
+                color:blue;
+                font-size: 14px;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- html 代码 -->
+        <div id="app">
+            <div class="group">
+                <p class="groupTitle">http</p>
+                <div>
+                    <p>{{currentUser.userName || '未登录'}}</p>
+                </div>
+                <div>
+                    title：<input type="text" v-model="formData.title">
+                    content：<input type="text" v-model="formData.content">
+                    <input type="button" v-on:click="createContent" value="createContent">
+                </div>
+                <div>
+                    <p v-for="content in contentList" v-on:click="getDetail(content.id)">{{content}}</p>
+                </div>
+                <div>
+                    <input type="button" v-on:click="login" value="login">
+                    <input type="button" v-on:click="logout" value="logout">
+                    <input type="button" v-on:click="getCurrentUser" value="getCurrentUser">
+                </div>
+            </div>
+        </div>
+        
+        <script src="//cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+        <script src="./index.js"></script>
+    </body>
+</html>

@@ -1,0 +1,8 @@
+<div>
+    <h1> 详情页面 </h1>
+    <div>标题：{{item.title}}</div>
+    <div>内容：{{item.content}}</div>
+    <div>创建时间：{{item.createdAt}}</div>
+    <div>创建人：{{item.creater}}</div>
+    <input type="button" value="编辑" ng-click="create(item.id)" ng-show="static">
+</div>

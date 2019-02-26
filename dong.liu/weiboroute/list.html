@@ -1,0 +1,26 @@
+<div class="listBody">
+    <h1 class="loginh1"> 列表 </h1>
+    <div class="listTable">
+    <table cellspacing="0" cellpadding="0">
+        <tr ng-repeat="item in lists">
+            <td>日期：{{ item.createdAt }}</td>
+            <td>名称：{{ item.title }}</td>
+            <td>创建者：{{ item.creater }}</td>
+            <td>
+                <input type="button" class="listEdit" value="删除" ng-click="delete(item.id)" ng-show="static">
+                <input type="button" class="listEdit" value="详情" ng-click="detail(item.id)" />
+            </td>
+        </tr>
+    </table>
+</div>
+    <page page-index="pageIndex" page-size="pageSize" total-count="totalCount" get-list="getlist(index,size)"></page>
+    <div class="listFoot">
+        <span>当前每页数据数量：{{pageSize}}</span>
+        <span>页码：
+            <input type="text" class="listText" ng-model="pageIndex" />
+        </span>
+        <!-- 查询第几页 -->
+        <button class="listEdit" ng-click="getlist(pageIndex,pageSize)">查询</button>
+        <button class="listEdit" ng-click="create()">新建</button>
+    </div>
+</div>

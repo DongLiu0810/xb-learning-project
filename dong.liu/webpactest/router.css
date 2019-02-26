@@ -1,0 +1,130 @@
+.total {
+    margin-left: 30px;
+  }
+  .totalBody {
+    margin-left: 30px;
+  }
+  .login{
+    float: right;
+    margin-right: 100px;
+    margin-top: 50px;
+    border: 1px rgb(182, 162, 162) solid;
+    width: 340px;
+    min-height: 430px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 7px 13px 0px rgba(28, 41, 50, 0.16);
+  }
+  .loginText {
+    width: 260px;
+    height: 40px;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 35px auto;
+  }
+  .loginh1{
+    color: #5B8AF9;
+    text-align: center;
+    font-weight: normal;
+    letter-spacing: 9px;
+  }
+  .loginButton {
+    width: 260px;
+    height: 40px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #5B8AF9;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 49px 10px 39px;
+  }
+  table tr td {
+    width: 200px;
+    border: rgb(28, 133, 219) 1px solid;
+  }
+  table tr:hover {
+    background-color: #5B8AF9;
+  }
+  .indexButton {
+    margin-top: 10px;
+    height: 25px;
+    width: 100px;
+  }
+  .listFoot {
+    margin-top: 10px;
+  }
+  .listText {
+    width: 25px;
+  }
+  .createTitle {
+    display: block;
+  }
+  .createContent {
+    display: block;
+  }
+  .createButton {
+    margin-top: 5px;
+  }
+  .pagecompents {
+    margin-top: 10px;
+  }
+  .size {
+    display: block;
+  margin-left: 620px;
+  }
+  .sizeButton {
+    background: white;
+    width: 30px;
+    height: 28px;
+    margin-right: 5px;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+  }
+  .sizeButton:hover {
+    border: 2px #5b8af9 solid;
+  }
+  .pageindexButton {
+    background: white;
+    width: 30px;
+    height: 28px;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+  }
+  .pageindexButton:hover {
+    border: 2px #5b8af9 solid;
+  }
+  .pageindexButtoncheck{
+    background: rgb(25, 153, 228);
+    color: white;
+  }
+  .switchpage {
+    background: white;
+    width: 80px;
+    height: 28px;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+  }
+  .switchpage:hover {
+    border: 2px #5b8af9 solid;
+  }
+  .listBody{
+   text-align: center;
+  }
+  .listTable{
+  
+    margin-left: 257px;
+  }
+  .listEdit{
+    font-size: 16px;
+    color: #fff;
+    background-color: rgb(184, 199, 233);
+    border-radius: 5px;
+    cursor: pointer;
+  }
